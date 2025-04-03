@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <!-- Name Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Your Name"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"
+                android:padding="8dp"
+                android:imeOptions="actionDone"/>
+
+            <ImageView
+                android:id="@+id/editName"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <!-- Email Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:imeOptions="actionDone"/>
+
+            <ImageView
+                android:id="@+id/editEmail"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <!-- Designation -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDesignation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Designation"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/etDesignation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"
+                android:padding="8dp"
+                android:imeOptions="actionDone"/>
+
+            <ImageView
+                android:id="@+id/editDesignation"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <!-- Specialties -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSpecialties"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Specialties"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/etSpecialties"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"
+                android:padding="8dp"
+                android:imeOptions="actionDone"/>
+
+            <ImageView
+                android:id="@+id/editSpecialties"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <!-- Experience (Number input) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvExperience"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Experience (Years)"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/etExperience"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="number"
+                android:padding="8dp"
+                android:imeOptions="actionDone"/>
+
+            <ImageView
+                android:id="@+id/editExperience"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginTop="150dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

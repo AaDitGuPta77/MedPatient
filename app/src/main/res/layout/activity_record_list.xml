@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    android:elevation="2dp"
+    android:layout_margin="5dp">
+
+    <TextView android:id="@+id/tvRecordDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"/>
+    <TextView android:id="@+id/tvRecordDiagnosis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"/>
+    <TextView android:id="@+id/tvRecordDoctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/medicineContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tvMedicinesHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicines"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tvMedicineDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+</LinearLayout>

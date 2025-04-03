@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:elevation="8dp"
+    android:layout_margin="24dp">
+
+    <!-- Date Field (Non-Editable) -->
+    <EditText
+        android:id="@+id/dateField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:padding="8dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:textColor="@android:color/black"
+        android:background="@android:drawable/editbox_background"/>
+
+    <!-- Disease Label and EditText in Horizontal Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <!-- Disease Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disease:"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Disease EditText -->
+        <EditText
+            android:id="@+id/diseaseField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter disease"
+            android:padding="8dp"
+            android:background="@android:drawable/editbox_background"/>
+    </LinearLayout>
+
+    <!-- Medicines Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medicines"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="12dp"/>
+
+    <!-- EditText Container -->
+    <LinearLayout
+        android:id="@+id/editTextContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Initial Medicine and Dosage Fields -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <!-- Medicine Name -->
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Medicine Name"
+                android:padding="8dp"
+                android:background="@android:drawable/editbox_background"/>
+
+            <!-- Dosage -->
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Dosage"
+                android:padding="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Button to Add More Medicine Fields -->
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Add More"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"/>
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"/>
+</LinearLayout>
