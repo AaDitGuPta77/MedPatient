@@ -1,6 +1,5 @@
-package com.example.medpatient;
+package com.example.medpatient.fragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.medpatient.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

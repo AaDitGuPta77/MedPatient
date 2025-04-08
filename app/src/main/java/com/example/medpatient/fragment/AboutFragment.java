@@ -1,7 +1,6 @@
-package com.example.medpatient;
+package com.example.medpatient.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.medpatient.localModels.Doctor;
+import com.example.medpatient.R;
 
 //import com.google.firebase.firestore.FirebaseFirestore;
 

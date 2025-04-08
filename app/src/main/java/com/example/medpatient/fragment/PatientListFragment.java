@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,13 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.google.firebase.firestore.DocumentSnapshot;
 //import com.google.firebase.firestore.FirebaseFirestore;
+
+import com.example.medpatient.HomeScreen;
+import com.example.medpatient.R;
+import com.example.medpatient.adapyers.PatientAdapter;
+import com.example.medpatient.backend.BackendManager;
+import com.example.medpatient.backend.interfaces.DoctorAppointmentsCallback;
+import com.example.medpatient.backend.models.Appointment;
+import com.example.medpatient.localModels.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +51,7 @@ public class PatientListFragment extends Fragment {
             @Override
             public void onCheckedClick(Patient patient) {
                 int position = patientList.indexOf(patient);
-                ((MainActivity) requireActivity()).addToPreviousPatients(patient);
+                ((HomeScreen) requireActivity()).addToPreviousPatients(patient);
                 adapter.removePatient(position);
             }
         });
@@ -52,26 +59,26 @@ public class PatientListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         // Fetch patients assigned to this doctor from Firestore
-        getAllDoctorAppointments(doctorId);
+        getAllDoctorAppointments();
 
         return view;
     }
 //<-----------------------------------Database----------------------------------------------------->
-    private void getAllDoctorAppointments(String doctorId) {
-//        db.collection("Patients")
-//                .whereEqualTo("doctorId", doctorId) // Get patients assigned to this doctor
-//                .get()
-//                .addOnSuccessListener(queryDocumentSnapshots -> {
-//                    patientList.clear(); // Clear old data before adding new data
-//                    for (DocumentSnapshot document : queryDocumentSnapshots) {
-//                        Patient patient = document.toObject(Patient.class);
-//                        if (patient != null) {
-//                            patient.setPatientId(document.getId()); // Assign Firestore-generated ID
-//                            patientList.add(patient);
-//                        }
-//                    }
-//                    adapter.notifyDataSetChanged(); // Refresh RecyclerView with new data
-//                })
-//                .addOnFailureListener(e -> Log.e("Firebase", "Error fetching patients", e));
+    private void getAllDoctorAppointments() {
+        BackendManager backendManager = new BackendManager();
+        backendManager.getAllDoctorAppointments(new DoctorAppointmentsCallback() {
+            @Override
+            public void onAppointmentsReceived(List<Appointment> appointments) {
+                // abhi shirf size log karva raha hu ise adapter me set kar dena
+                Log.d("Appointments", "Fetched: " + appointments.size());
+
+                // Do something with the appointment list (e.g., populate a RecyclerView)
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e("Appointments", "Failed to fetch: " + errorMessage);
+            }
+        });
     }
 }

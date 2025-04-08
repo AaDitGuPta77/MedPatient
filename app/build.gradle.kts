@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -32,6 +33,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    packagingOptions { resources.excludes.add("META-INF/*") }
+
 }
 
 dependencies {
@@ -42,7 +46,19 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
+    implementation(libs.android.volley)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+    implementation(platform(libs.firebase.bom.v33100))
+    implementation(libs.google.firebase.auth.ktx)
+    implementation("com.google.firebase:firebase-messaging")
+
+    implementation ("com.google.auth:google-auth-library-oauth2-http:1.19.0")
 }

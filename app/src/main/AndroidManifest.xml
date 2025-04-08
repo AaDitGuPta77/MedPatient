@@ -12,12 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPatient"
         tools:targetApi="31">
+
         <activity
-            android:name=".PatientHistory"
+            android:name=".HomeScreen"
+            android:exported="false"
+            android:theme="@style/Theme.MedPatient" />
+
+        <activity
+            android:name=".RegisterScreen"
+            android:exported="false"
+            android:theme="@style/Theme.MedPatient" />
+
+        <activity
+            android:name=".OnBoardingScreen"
+            android:exported="false"
+            android:theme="@style/Theme.MedPatient" />
+
+        <activity
+            android:name=".PatientHistoryScreen"
             android:exported="false"
             android:theme="@style/Theme.MedPatient" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

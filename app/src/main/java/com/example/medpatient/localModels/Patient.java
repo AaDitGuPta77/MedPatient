@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.localModels;
 
 public class Patient {
     private String patientId;  // Firestore-generated ID

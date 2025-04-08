@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.localModels;
 
 public class Doctor {
     private String name, email, designation, specialties, experience;

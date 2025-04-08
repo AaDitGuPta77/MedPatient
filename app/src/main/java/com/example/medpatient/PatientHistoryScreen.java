@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //import com.google.firebase.firestore.DocumentSnapshot;
 //import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.medpatient.adapyers.PatientHistoryAdapter;
+import com.example.medpatient.fragment.PopupDialogFragment;
+import com.example.medpatient.localModels.MedicalRecords;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PatientHistory extends AppCompatActivity {
+public class PatientHistoryScreen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PatientHistoryAdapter adapter;
