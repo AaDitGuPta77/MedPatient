@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.medpatient.R;
+import com.example.medpatient.adapyers.PatientAdapter;
+import com.example.medpatient.localModels.Patient;
 
 import java.util.ArrayList;
 import java.util.List;

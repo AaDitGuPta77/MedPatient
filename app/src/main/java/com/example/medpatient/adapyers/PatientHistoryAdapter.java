@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.adapyers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.medpatient.localModels.MedicalRecords;
+import com.example.medpatient.localModels.Medicine;
+import com.example.medpatient.R;
+
 import java.util.List;
 
 public class PatientHistoryAdapter extends RecyclerView.Adapter<PatientHistoryAdapter.MedicalRecordViewHolder> {

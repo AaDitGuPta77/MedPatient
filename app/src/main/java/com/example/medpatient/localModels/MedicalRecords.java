@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.localModels;
 
 import java.util.List;
 

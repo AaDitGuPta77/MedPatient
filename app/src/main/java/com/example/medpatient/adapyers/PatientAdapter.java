@@ -1,4 +1,4 @@
-package com.example.medpatient;
+package com.example.medpatient.adapyers;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.medpatient.localModels.Patient;
+import com.example.medpatient.PatientHistoryScreen;
+import com.example.medpatient.R;
 
 import java.util.List;
 
@@ -46,7 +50,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
             listener.onGetDetailsClick(patient);
 
             // Open PatientHistory activity and pass patientId
-            Intent intent = new Intent(holder.itemView.getContext(), PatientHistory.class);
+            Intent intent = new Intent(holder.itemView.getContext(), PatientHistoryScreen.class);
             intent.putExtra("patientId", patient.getPatientId());  // Pass Firestore ID
             holder.itemView.getContext().startActivity(intent);
         });
