@@ -32,6 +32,12 @@
             android:name=".PatientHistoryScreen"
             android:exported="false"
             android:theme="@style/Theme.MedPatient" />
+
+        <activity
+            android:name=".fragment.PatientHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MedPatient" />
+
         <activity
             android:name=".LoginScreen"
             android:exported="true">

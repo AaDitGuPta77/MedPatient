@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +16,10 @@ import com.example.medpatient.adapyers.PatientHistoryAdapter;
 import com.example.medpatient.fragment.PopupDialogFragment;
 import com.example.medpatient.localModels.MedicalRecords;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientHistoryScreen extends AppCompatActivity {
@@ -38,7 +42,7 @@ public class PatientHistoryScreen extends AppCompatActivity {
         // Get patient details from Intent
         Intent intent = getIntent();
         String patientName = intent.getStringExtra("patientName");
-        String appointmentId = intent.getStringExtra("appointmentId");
+        String appointmentId = intent.getStringExtra("patientId");
 
         // Initialize views
         tvPatientName = findViewById(R.id.tvPatientName);
@@ -59,25 +63,31 @@ public class PatientHistoryScreen extends AppCompatActivity {
         fabAddRecord.setOnClickListener(v -> openPopup());
     }
 //<---------------------------------------Database------------------------------------>
-    private void getAppointmentDetails(String appointmentId) {
-//        db.collection("Appointments")
-//                .document(appointmentId)
-//                .get()
-//                .addOnSuccessListener(documentSnapshot -> {
-//                    if (documentSnapshot.exists()) {
-//                        MedicalRecords record = documentSnapshot.toObject(MedicalRecords.class);
-//                        if (record != null) {
-//                            recordList = new ArrayList<>();
-//                            recordList.add(record);
-//                            adapter = new PatientHistoryAdapter(recordList);
-//                            recyclerView.setAdapter(adapter);
-//                        }
-//                    } else {
-//                        Toast.makeText(PatientHistory.this, "No appointment found.", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .addOnFailureListener(e -> Toast.makeText(PatientHistory.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
+private void getAppointmentDetails(String patientId) {
+    FirebaseFirestore db = FirebaseFirestore.getInstance(); // Firebase init
+    recordList = new ArrayList<>();
+
+    db.collection("appointments")
+            .whereEqualTo("userId", patientId)  // Filter appointments by patientId
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    for (DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
+                        MedicalRecords record = doc.toObject(MedicalRecords.class);
+                        if (record != null) {
+                            recordList.add(record);
+                        }
+                    }
+                    adapter = new PatientHistoryAdapter(recordList);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(PatientHistoryScreen.this, "No medical records found.", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .addOnFailureListener(e -> {
+                Toast.makeText(PatientHistoryScreen.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+}
 
     private void openPopup() {
         PopupDialogFragment popup = new PopupDialogFragment();

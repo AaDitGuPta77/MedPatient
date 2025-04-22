@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_patient_list"
-        android:icon="@drawable/house"
+        android:icon="@drawable/patient"
         android:title="Patients" />
     <item
         android:id="@+id/nav_previous_patients"
-        android:icon="@drawable/house"
+        android:icon="@drawable/history"
         android:title="History" />
     <item
         android:id="@+id/nav_about"
-        android:icon="@drawable/house"
+        android:icon="@drawable/about"
         android:title="About" />
 </menu>

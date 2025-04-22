@@ -4,12 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medpatient.R;
 import com.example.medpatient.localModels.MedicalRecords;
 import com.example.medpatient.localModels.Medicine;
-import com.example.medpatient.R;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class PatientHistoryAdapter extends RecyclerView.Adapter<PatientHistoryAd
 
     private List<MedicalRecords> medicalRecords;
 
+    // Constructor
     public PatientHistoryAdapter(List<MedicalRecords> medicalRecords) {
         this.medicalRecords = medicalRecords;
     }
@@ -35,17 +37,19 @@ public class PatientHistoryAdapter extends RecyclerView.Adapter<PatientHistoryAd
         holder.tvRecordDiagnosis.setText("Diagnosis: " + record.getDiagnosis());
         holder.tvRecordDoctor.setText("Doctor: " + record.getDoctorName());
 
-        if (!record.getMedicines().isEmpty()) {
-            holder.medicineContainer.setVisibility(View.VISIBLE);
-            holder.tvMedicinesHeader.setVisibility(View.VISIBLE);
-
-            StringBuilder medicineDetails = new StringBuilder();
-            for (Medicine med : record.getMedicines()) {
-                medicineDetails.append(med.getName()).append(" - ").append(med.getDosage()).append("\n");
+        List<Medicine> medicines = record.getMedicines();
+        if (medicines != null && !medicines.isEmpty()) {
+            StringBuilder medList = new StringBuilder();
+            for (Medicine med : medicines) {
+                medList.append("• ").append(med.getName())
+                        .append(" - ").append(med.getDosage())
+                        .append("\n");
             }
-            holder.tvMedicineDetails.setText(medicineDetails.toString().trim());
+            holder.tvMedicineDetails.setText(medList.toString().trim());
+            holder.tvMedicineDetails.setVisibility(View.VISIBLE);
         } else {
-            holder.medicineContainer.setVisibility(View.GONE);
+            holder.tvMedicineDetails.setText("No medicines prescribed.");
+            holder.tvMedicineDetails.setVisibility(View.GONE);
         }
     }
 
@@ -55,25 +59,15 @@ public class PatientHistoryAdapter extends RecyclerView.Adapter<PatientHistoryAd
     }
 
     public static class MedicalRecordViewHolder extends RecyclerView.ViewHolder {
-        TextView tvRecordDate, tvRecordDiagnosis, tvRecordDoctor, tvMedicinesHeader, tvMedicineDetails;
-        View medicineContainer;
+
+        TextView tvRecordDate, tvRecordDiagnosis, tvRecordDoctor, tvMedicineDetails;
 
         public MedicalRecordViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRecordDate = itemView.findViewById(R.id.tvRecordDate);
             tvRecordDiagnosis = itemView.findViewById(R.id.tvRecordDiagnosis);
             tvRecordDoctor = itemView.findViewById(R.id.tvRecordDoctor);
-            tvMedicinesHeader = itemView.findViewById(R.id.tvMedicinesHeader);
             tvMedicineDetails = itemView.findViewById(R.id.tvMedicineDetails);
-            medicineContainer = itemView.findViewById(R.id.medicineContainer);
         }
-    }
-
-    private void displayMedicines(MedicalRecordViewHolder holder, List<Medicine> medicineList) {
-        StringBuilder medicineDetails = new StringBuilder();
-        for (Medicine medicine : medicineList) {
-            medicineDetails.append("• ").append(medicine.getName()).append(" - ").append(medicine.getDosage()).append("\n");
-        }
-        holder.tvMedicineDetails.setText(medicineDetails.toString());
     }
 }

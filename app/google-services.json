@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "310516896337",
+    "firebase_url": "https://mediquick-f9cad-default-rtdb.firebaseio.com",
+    "project_id": "mediquick-f9cad",
+    "storage_bucket": "mediquick-f9cad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310516896337:android:1c8b07535a0ca72cad5e70",
+        "android_client_info": {
+          "package_name": "com.example.mdcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiAPSVrz0z4UtDrK0wwg67YhXlH2MvgmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310516896337:android:9722451356c8dfadad5e70",
+        "android_client_info": {
+          "package_name": "com.example.mdtest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiAPSVrz0z4UtDrK0wwg67YhXlH2MvgmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310516896337:android:3d39505cba02621dad5e70",
+        "android_client_info": {
+          "package_name": "com.example.mediquick"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiAPSVrz0z4UtDrK0wwg67YhXlH2MvgmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310516896337:android:f50794d6cfc64aa8ad5e70",
+        "android_client_info": {
+          "package_name": "com.example.medpatient"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiAPSVrz0z4UtDrK0wwg67YhXlH2MvgmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310516896337:android:b9ba52b795242fb1ad5e70",
+        "android_client_info": {
+          "package_name": "com.example.pharmacy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiAPSVrz0z4UtDrK0wwg67YhXlH2MvgmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

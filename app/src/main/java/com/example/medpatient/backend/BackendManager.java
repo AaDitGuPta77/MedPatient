@@ -21,6 +21,7 @@ import com.example.medpatient.backend.interfaces.PatientHistoryCallback;
 import com.example.medpatient.backend.interfaces.PharmacyOrdersCallback;
 import com.example.medpatient.backend.interfaces.PrescriptionCallback;
 import com.example.medpatient.backend.interfaces.UpdateStatusCallback;
+import com.example.medpatient.backend.interfaces.UserDataCallback;
 import com.example.medpatient.backend.interfaces.UserHistoryCallback;
 import com.example.medpatient.backend.models.Appointment;
 import com.example.medpatient.backend.models.Doctor;
@@ -123,6 +124,8 @@ DatabaseRoot
 public class BackendManager {
     private DatabaseReference database;
     private FirebaseAuth mAuth;
+    private static BackendManager instance;
+
     // Write a message to the database
 
     public BackendManager(){
@@ -130,7 +133,39 @@ public class BackendManager {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    public static BackendManager getInstance() {
+        if (instance == null) {
+            instance = new BackendManager();
+        }
+        return instance;
+    }
+
 //-----------------------------------------------USER METHODS--------------------------------------------//
+
+
+    public void fetchUserData(String userId, final UserDataCallback callback) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+        userRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+                DataSnapshot snapshot = task.getResult();
+
+                String fullName = snapshot.child("fullName").getValue(String.class);
+                String dob = snapshot.child("dob").getValue(String.class);
+                String phoneNumber = snapshot.child("phoneNumber").getValue(String.class);
+
+                User user = new User();
+                user.setFullName(fullName);
+                user.setContactNumber(phoneNumber);
+                user.setDOB(dob);
+
+                callback.onSuccess(user);
+            } else {
+                callback.onFailure("Failed to fetch user data.");
+            }
+        }).addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
 
     // TODO: Implement addUserDetail(HashMap<String, String> map) function to add user details to the database.
     public void addUserDetail(User user) {
@@ -710,9 +745,9 @@ public void getAllDoctors(final DoctorListCallback callback) {
                                 appointment.setDoctorId(appointmentSnapshot.child("doctorId").getValue(String.class));
                                 appointment.setUserId(appointmentSnapshot.child("userId").getValue(String.class));
                                 appointment.setStatus(appointmentSnapshot.child("status").getValue(String.class));
-                                appointment.setDate(appointmentSnapshot.child("appointmentDate").getValue(String.class));
+                                appointment.setAppointmentDate(appointmentSnapshot.child("appointmentDate").getValue(String.class));
                                 appointment.setTime(appointmentSnapshot.child("appointmentTime").getValue(String.class));
-                                appointment.setCreatedAt(String.valueOf(appointmentSnapshot.child("created_at").getValue(Long.class)));
+                                appointment.setCreated_at(appointmentSnapshot.child("created_at").getValue(Long.class));
                                 appointment.setAppointmentId(appointmentSnapshot.getKey());
 
                                 // Only add if status is Pending or Completed
@@ -848,39 +883,33 @@ public void getAllDoctors(final DoctorListCallback callback) {
 
 // TODO: Implement getPatientHistory() function to view the medical history of a patient before accepting an appointment.
 
+
     public void getPatientHistory(String userId, final PatientHistoryCallback callback) {
         DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
-        // Fetch user name first
-        usersRef.child("name").get().addOnCompleteListener(userTask -> {
-            if (userTask.isSuccessful() && userTask.getResult().exists()) {
-                String userName = userTask.getResult().getValue(String.class);
+        appointmentsRef.orderByChild("userId").equalTo(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Appointment> patientHistory = new ArrayList<>();
 
-                // Now fetch the patient's past appointments
-                appointmentsRef.orderByChild("userId").equalTo(userId)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                List<Appointment> patientHistory = new ArrayList<>();
-                                for (DataSnapshot appointmentSnapshot : snapshot.getChildren()) {
-                                    Appointment appointment = appointmentSnapshot.getValue(Appointment.class);
-                                    if (appointment != null && (appointment.getStatus().equals("Completed") || appointment.getStatus().equals("Accepted"))) {
-                                        patientHistory.add(appointment);
-                                    }
-                                }
-                                callback.onHistoryReceived(userName, patientHistory);
+                        for (DataSnapshot appointmentSnapshot : snapshot.getChildren()) {
+                            Appointment appointment = appointmentSnapshot.getValue(Appointment.class);
+                            if (appointment != null &&
+                                    ("Completed".equalsIgnoreCase(appointment.getStatus()) || "Accepted".equalsIgnoreCase(appointment.getStatus()))) {
+                                patientHistory.add(appointment);
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                callback.onError("Failed to fetch appointment history: " + error.getMessage());
-                            }
-                        });
-            } else {
-                callback.onError("User not found.");
-            }
-        });
+                        // You can pass null or empty string if name is not needed
+                        callback.onHistoryReceived(null, patientHistory);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        callback.onError("Error loading appointments: " + error.getMessage());
+                    }
+                });
     }
 
     /*

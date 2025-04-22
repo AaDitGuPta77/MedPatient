@@ -37,7 +37,7 @@ public class HomeScreen extends AppCompatActivity {
         if (item.getItemId() == R.id.nav_patient_list) {
             selectedFragment = new PatientListFragment();
         } else if (item.getItemId() == R.id.nav_previous_patients) {
-            selectedFragment = PreviousPatientsFragment.newInstance(previousPatients);
+            selectedFragment = new PreviousPatientsFragment();
         } else if (item.getItemId() == R.id.nav_about) {
             selectedFragment = new AboutFragment();
         }
@@ -63,7 +63,7 @@ public class HomeScreen extends AppCompatActivity {
     private void refreshPreviousPatients() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (currentFragment instanceof PreviousPatientsFragment) {
-            loadFragment(PreviousPatientsFragment.newInstance(previousPatients));
+            loadFragment(new PreviousPatientsFragment());
         }
     }
 }

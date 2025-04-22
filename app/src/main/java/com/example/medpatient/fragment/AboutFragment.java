@@ -1,6 +1,7 @@
 package com.example.medpatient.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.medpatient.localModels.Doctor;
+import com.example.medpatient.backend.models.Doctor;
 import com.example.medpatient.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 //import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,13 +35,16 @@ public class AboutFragment extends Fragment {
     private ImageView editName, editEmail, editDesignation, editSpecialties, editExperience;
     private Button btnSubmit;
 //    private FirebaseFirestore db;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     public AboutFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-//        db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         tvName = view.findViewById(R.id.tvName);
         etName = view.findViewById(R.id.etName);
@@ -59,10 +73,46 @@ public class AboutFragment extends Fragment {
         setEditFunctionality(tvExperience, etExperience, editExperience);
 
         btnSubmit = view.findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(v -> submitDoctorDetails());
+//        btnSubmit.setOnClickListener(v -> submitDoctorDetails());
+
+        loadDoctorProfile();
 
         return view;
     }
+
+
+    private void loadDoctorProfile() {
+        String doctorId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        DatabaseReference doctorRef = FirebaseDatabase.getInstance().getReference("doctors").child(doctorId);
+        doctorRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Doctor doctor = snapshot.getValue(Doctor.class);
+                    if (doctor != null) {
+                        tvName.setText(doctor.getName());
+                        tvEmail.setText(doctor.getAddress());
+                        tvSpecialties.setText(doctor.getSpecialization());
+                        tvDesignation.setText(doctor.getPhone());
+                        tvExperience.setText(doctor.getExperience() + "years");
+
+                        btnSubmit.setVisibility(View.GONE);
+                    }
+                } else {
+                    Toast.makeText(getContext(), "New doctor! Please complete your profile.", Toast.LENGTH_SHORT).show();
+                    btnSubmit.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Failed to load doctor profile.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     private void setEditFunctionality(TextView textView, EditText editText, ImageView editIcon) {
         editIcon.setOnClickListener(v -> {
@@ -105,8 +155,8 @@ public class AboutFragment extends Fragment {
             return;
         }
 
-        Doctor doctor = new Doctor(name, email, designation, specialties, experience);
-        addDoctorDetail(doctor);
+//        Doctor doctor = new Doctor(name, email, designation, specialties, experience);
+//        addDoctorDetail(doctor);
     }
 //<-----------------------------Add Doctor to database-------------------------------------------------->//
     private void addDoctorDetail(Doctor doctor) {
