@@ -12,7 +12,7 @@
         android:textColor="@color/white"
         android:paddingTop="20px"
         android:textSize="80px"
-        android:background="@color/teal_700"/>
+        android:background="#03A9F4"/>
 
     <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView

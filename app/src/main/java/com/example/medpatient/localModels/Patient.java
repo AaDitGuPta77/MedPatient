@@ -7,6 +7,7 @@ public class Patient {
     private String age;
     private String contact;
     private Boolean isChecked;
+    private String appointmentId;
 
     // Default Constructor (Required for Firestore)
     public Patient() {}
@@ -39,5 +40,13 @@ public class Patient {
 
     public Boolean getChecked() { return isChecked; }
     public void setChecked(Boolean checked) { isChecked = checked; }
+
+    public String getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
+    }
 }
 

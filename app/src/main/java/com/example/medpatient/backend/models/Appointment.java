@@ -5,26 +5,26 @@ public class Appointment {
     private String userId;
     private String doctorId;
     private String status;
-    private String date;
+    private String appointmentDate;
     private String time;
     private String diagnosis;
     private String prescriptionId;
-    private String createdAt;
+    private Long created_at;
 
     public Appointment() {
         // Default constructor required for Firebase
     }
 
     public Appointment(String appointmentId, String userId, String doctorId, String status,
-                       String date, String diagnosis, String prescriptionId, String createdAt) {
+                       String appointmentDate, String diagnosis, String prescriptionId, Long created_at) {
         this.appointmentId = appointmentId;
         this.userId = userId;
         this.doctorId = doctorId;
         this.status = status;
-        this.date = date;
+        this.appointmentDate = appointmentDate;
         this.diagnosis = diagnosis;
         this.prescriptionId = prescriptionId;
-        this.createdAt = createdAt;
+        this.created_at = created_at;
     }
 
     public String getAppointmentId() { return appointmentId; }
@@ -39,8 +39,8 @@ public class Appointment {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
+    public String getAppointmentDate() { return appointmentDate; }
+    public void setAppointmentDate(String appointmentDate) { this.appointmentDate = appointmentDate; }
 
     public String getDiagnosis() { return diagnosis; }
     public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
@@ -48,8 +48,8 @@ public class Appointment {
     public String getPrescriptionId() { return prescriptionId; }
     public void setPrescriptionId(String prescriptionId) { this.prescriptionId = prescriptionId; }
 
-    public String getCreatedAt() { return createdAt; }
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public Long getCreated_at() { return created_at; }
+    public void setCreated_at(Long created_at) { this.created_at = created_at; }
 
 
     public String getTime() {
